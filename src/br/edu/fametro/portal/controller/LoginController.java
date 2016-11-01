@@ -66,6 +66,7 @@ public class LoginController extends HttpServlet {
 	}
 
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		String username = request.getParameter("username");
 		String senha = request.getParameter("password");
 
@@ -119,6 +120,6 @@ public class LoginController extends HttpServlet {
 		} else {
 			response.sendRedirect("home.jsp");
 		}
-
+		
 	}
 }
