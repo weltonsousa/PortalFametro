@@ -1,34 +1,34 @@
 package br.edu.fametro.portal.model.atores;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import br.edu.fametro.portal.model.Endereco;
 import br.edu.fametro.portal.model.Sistema;
 import br.edu.fametro.portal.model.Telefone;
-import br.edu.fametro.portal.model.enums.Genero;
 import br.edu.fametro.portal.model.enums.TipoUsuario;
 
 public class Secretario extends Pessoa implements AcessaSistema {
+	private long id;
 	private String matricula;
 	private Endereco endereco;
+	private String email;
 	private Telefone residencial;
 	private Telefone celular;
 	private Telefone opcional;
 	private Usuario usuario;
 
-	public Secretario(long id, String nome, String rg, String cpf, Date nascimento, Genero genero) {
-		super(nome, rg, cpf, nascimento, genero);
+	public Secretario(long id) {
+		this.id = id;
 		matricula = Sistema.geraMatricula(TipoUsuario.SECRETARIO, Calendar.getInstance().getTime(), id);
 		usuario = Sistema.geraPrimeiroAcesso(matricula, TipoUsuario.SECRETARIO);
 	}
 
-	public String getMatricula() {
-		return matricula;
+	public long getId() {
+		return id;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public String getMatricula() {
+		return matricula;
 	}
 
 	public Endereco getEndereco() {
@@ -37,6 +37,14 @@ public class Secretario extends Pessoa implements AcessaSistema {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Telefone getResidencial() {
@@ -63,23 +71,18 @@ public class Secretario extends Pessoa implements AcessaSistema {
 		this.opcional = opcional;
 	}
 
-	public void setUsuario(Usuario acesso) {
-		this.usuario = acesso;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return super.equals(obj);
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		String buffer = new String();
-		buffer += "Registro Acadêmico: " + matricula + "\n";
-		buffer += super.toString();
-		buffer += usuario + "\n";
-		return buffer;
+		return super.toString() + ", Secretario [id=" + id + ", matricula=" + matricula + ", endereco=" + endereco
+				+ ", email=" + email + ", residencial=" + residencial + ", celular=" + celular + ", opcional="
+				+ opcional + ", usuario=" + usuario + "]";
 	}
 }

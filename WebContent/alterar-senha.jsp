@@ -11,6 +11,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="FlavioAlves">
 <link rel="shortcut icon" href="img/favicon.ico">
+<!-- Mascara -->
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="jquery/jquery.maskedinput.js"></script>
+
+<script>
+function validarSenha(){
+	novasenha = document.getElementById('nova-senha').value;
+	confirmarsenha = document.getElementById('confirmar-senha').value;
+   if (novasenha != confirmarsenha) {
+      alert("Você deve inserir a mesma senha duas vezes para confirmá-la. !");
+	  document.getElementById('confirmar-senha').value='';
+	   
+   }else{
+      document.FormSenha.submit();
+   }
+}
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#data-nascimento").mask("99/99/9999");               
+});
+</script>
 
 <title>Portal Fametro | Perfil</title>
 
@@ -93,10 +117,10 @@
 												Análise e Desenvolvimento de Sistemas</li>
 										</ul>
 									</div>
-									<div class="col-md-9 col-sm-9 col-xs-12">
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
 										<div class="x_content">
 											<br />
-											<form id="demo-form2" data-parsley-validate
+											<form id="demo-form2" name="demo-form2" data-parsley-validate
 												class="form-horizontal form-label-left" method="post"
 												action="home.jsp">
 												<div class="profile_title">
@@ -106,46 +130,48 @@
 												</div>
 												<br />
 												<div class="form-group">
-													<label class="col-md-3 col-sm-3 col-xs-6" 
-                                                    	for="first-name">Registro Acadêmico <span class="required">*</span>
+													<label class="col-md-3 col-sm-3 col-xs-12" for="registro">Registro Acadêmico 
+                                                    	<span class="required">*</span>
 													</label> 
                                                     
-                                                    <label class="col-md-9 col-sm-9 col-xs-18"
-														for="first-name">Nome <span class="required">*</span>
+                                                    <label class="col-md-9 col-sm-9 col-xs-12" for="nome">Nome 
+														<span class="required">*</span>
 													</label>
                                                     
-													<div class="col-md-3 col-sm-3 col-xs-6">
-														<input type="text" name="registro" id="registro" required
+													<div class="col-md-3 col-sm-3 col-xs-12">
+														<input disabled ="text" name="registro" id="registro" required
 															class="form-control col-md-7 col-xs-12">
 													</div>
-													<div class="col-md-9 col-sm-9 col-xs-18">
-														<input type="text" name="nome" id="nome" required
+													
+													<div class="col-md-9 col-sm-9 col-xs-12">
+														<input disabled type="text" name="nome" id="nome" required
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
+												
 												<div class="form-group">
-													<label class="col-md-3 col-sm-3 col-xs-6" 
-                                                    	for="first-name">Data de Nascimento <span class="required">*</span>
+													<label class="col-md-3 col-sm-3 col-xs-12" for="data-nascimento">Data de Nascimento 
+                                                    	<span class="required">*</span>
 													</label> 
                                                     
-                                                    <label class="col-md-5 col-sm-5 col-xs-10"
-														for="first-name">Naturalidade <span	class="required">*</span>
+                                                    <label class="col-md-5 col-sm-5 col-xs-12" for="naturalidade">Naturalidade 
+														<span	class="required">*</span>
 													</label> 
                                                     
-                                                    <label class="col-md-4 col-sm-4 col-xs-8" 
-                                                    	for="first-name">Estado	Natal <span class="required">*</span>
+                                                    <label class="col-md-4 col-sm-4 col-xs-12" for="estado-natal">Estado Natal 
+                                                    	<span class="required">*</span>
 													</label>
                                                     
-													<div class="col-md-3 col-sm-3 col-xs-6">
-														<input type="text" name="data-nascimento" id="data-nascimento" required
+													<div class="col-md-3 col-sm-3 col-xs-12">
+														<input disabled type="text" name="data-nascimento" id="data-nascimento" required
 															class="form-control col-md-7 col-xs-12">
 													</div>
-													<div class="col-md-5 col-sm-5 col-xs-10">
-														<input type="text" name="naturalidade" id="naturalidade" required
+													<div class="col-md-5 col-sm-5 col-xs-12">
+														<input disabled type="text" name="naturalidade" id="naturalidade" required
 															class="form-control col-md-7 col-xs-12">
 													</div>
-													<div class="col-md-4 col-sm-4 col-xs-8">
-														<input type="text" name="estado-natal" id="estado-natal" required
+													<div class="col-md-4 col-sm-4 col-xs-12">
+														<input disabled type="text" name="estado-natal" id="estado-natal" required
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
@@ -157,34 +183,34 @@
 												</div>
 												<br />
 												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="first-name">Senha Atual <span class="required">*</span>
+													<label class="control-label col-md-3 col-sm-3 col-xs-12" for="senha-atual">Senha Atual 
+														<span class="required">*</span>
 													</label>
                                                     
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" name="senha-atual" id="senha-atual" required
+														<input type="password" name="senha-atual" id="senha-atual" required
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
                                                 
 												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="last-name">Nova Senha <span class="required">*</span>
+													<label class="control-label col-md-3 col-sm-3 col-xs-12" for="nova-senha">Nova Senha 
+														<span class="required">*</span>
 													</label>
                                                     
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" name="nova-senha" id="nova-senha" required="required"
+														<input type="password" name="nova-senha" id="nova-senha" required="required"
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
                                                 
 												<div class="form-group">
-													<label class="control-label col-md-3 col-sm-3 col-xs-12"
-														for="last-name">Confirmar Nova Senha <span class="required">*</span>
+													<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Confirmar Nova Senha 
+														<span class="required">*</span>
 													</label>
                                                     
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="text" name="confirmar-senha" id="confirmar-senha" required="required"
+														<input type="password" name="confirmar-senha" id="confirmar-senha" required="required"
 															class="form-control col-md-7 col-xs-12">
 													</div>
 												</div>
@@ -192,9 +218,8 @@
 												<div class="ln_solid"></div>
 												<div class="form-group">
 													<div class="col-md-6 col-sm-6 col-xs-12">
-														<input type="submit" class="btn btn-cancel	" name="concluir"
-															value="Cancelar"> <input type="submit"
-															class="btn btn-success" name="" value="Concluir">
+														<input type="submit" class="btn btn-cancel" name="concluir" value="Cancelar"> 
+														<input type="submit" class="btn btn-success" name="" value="Concluir" onClick="validarSenha()">
 													</div>
 												</div>
 											</form>
@@ -211,8 +236,6 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script src="jquery/jquery.min.js"></script>
 	<!-- Bootstrap -->
 	<script src="js/bootstrap.min.js"></script>
 	<!-- Custom Theme Scripts -->

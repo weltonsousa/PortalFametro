@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <!-- Meta, title, CSS, favicons, etc. -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +19,10 @@
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- jquery -->
+<script src="js/jquery.min.js"></script>
+
 <!-- Font Awesome -->
 <link href="css/font-awesome.min.css" rel="stylesheet">
 
@@ -24,8 +31,20 @@
 
 <!-- Switchery -->
 <link href="css/switchery/switchery.min.css" rel="stylesheet">
+
+<!-- Select -->
+<link href="css/select/bootstrap-select.css" rel="stylesheet">
+
 <!-- Select2 -->
 <link href="css/select2/select2.min.css" rel="stylesheet">
+
+<!-- Mascara -->
+<script type="text/javascript" src="jquery/jquery.js"></script>
+<script type="text/javascript" src="jquery/jquery.maskedinput.js"></script>
+<script type="text/javascript" src="js/mascara/mascara.js"></script>
+
+<!-- consulta do endereço pelo cep -->
+<script type="text/javascript" src="js/cep-consulta/cep-consulta.js"></script>
 
 </head>
 
@@ -33,7 +52,6 @@
 	<div class="container body">
 		<div class="main_container">
 			<c:import url="menu-de-navegacao.jsp" />
-
 			<c:import url="navegacao-de-topo.jsp" />
 
 			<!-- page content -->
@@ -59,6 +77,7 @@
 					</div>
 
 					<div class="clearfix"></div>
+
 
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
@@ -93,297 +112,62 @@
 										test="${param.tipo.equalsIgnoreCase('aluno') or param.tipo.equalsIgnoreCase('professor') or param.tipo.equalsIgnoreCase('secretario')}">
 										<div class="x_content">
 											<div class="col-md-12 col-sm-12 col-xs-12">
+												<c:if test="${erro }">
+													<div class="alert alert-danger" role="alert">
+														<img src="img/exclamação.png">&nbsp; &nbsp; Houve
+														algum erro e o cadastro não foi efetivado.
+													</div>
+												</c:if>
+												<c:if test="${sucesso }">
+													<div class="alert alert-sucess" role="alert">
+														<img src="img/success.png">&nbsp; &nbsp; Cadastro
+														efetivado.
+													</div>
+												</c:if>
 												<div class="x_content">
 													<br />
 													<c:if test="${param.tipo.equalsIgnoreCase('aluno') }">
-														<form id="formularioCadastro"
-															class="form-horizontal form-label-left" method="post"
-															action="AlunoController.do">
+														<c:choose>
+															<c:when test="${not sucesso }">
+																<%@ include
+																	file="includes/cadastro-usuario/cadastro-aluno.jsp"%>
+															</c:when>
+															<c:otherwise>
+																<%@ include
+																	file="includes/cadastro-usuario/aluno-cadastrado.jsp"%>
+															</c:otherwise>
+														</c:choose>
 													</c:if>
 													<c:if test="${param.tipo.equalsIgnoreCase('professor') }">
-														<form id="formularioCadastro"
-															class="form-horizontal form-label-left" method="post"
-															action="ProfessorController.do">
+														<c:choose>
+															<c:when test="${not sucesso }">
+																<%@ include
+																	file="includes/cadastro-usuario/cadastro-professor.jsp"%>
+															</c:when>
+															<c:otherwise>
+																<%@ include
+																	file="includes/cadastro-usuario/professor-cadastrado.jsp"%>
+															</c:otherwise>
+														</c:choose>
 													</c:if>
 													<c:if test="${param.tipo.equalsIgnoreCase('secretario') }">
-														<form id="formularioCadastro"
-															class="form-horizontal form-label-left" method="post"
-															action="SecretarioController.do">
+														<c:choose>
+															<c:when test="${not sucesso }">
+																<%@ include
+																	file="includes/cadastro-usuario/cadastro-secretario.jsp"%>
+															</c:when>
+															<c:otherwise>
+																<%@ include
+																	file="includes/cadastro-usuario/secretario-cadastrado.jsp"%>
+															</c:otherwise>
+														</c:choose>
 													</c:if>
-													<div class="profile_title">
-														<div class="col-md-6">
-															<h2>Identificação</h2>
-														</div>
-													</div>
-													<br />
-													<div class="form-group">
-														<label class="col-md-12 col-sm-12 col-xs-12" for="nome">Nome
-															<span class="required">*</span>
-														</label>
-
-														<div class="col-md-12 col-sm-12 col-xs-12">
-															<input type="text" name="nome" id="nome" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="col-md-4 col-sm-4 col-xs-8" for="rg">RG
-															<span class="required">*</span>
-														</label> <label class="col-md-4 col-sm-4 col-xs-8" for="cpf">CPF
-															<span class="required">*</span>
-														</label> <label class="col-md-4 col-sm-4 col-xs-8" for="genero">Gênero
-															<span class="required">*</span>
-														</label>
-
-														<div class="col-md-4 col-sm-4 col-xs-8">
-															<input type="text" name="rg" id="rg" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-4 col-sm-4 col-xs-8">
-															<input type="text" name="cpf" id="cpf" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-4 col-sm-4 col-xs-8">
-															<input type="text" name="genero" id="genero" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="col-md-3 col-sm-3 col-xs-6" for="nascimento">Data
-															de Nascimento <span class="required">*</span>
-														</label> <label class="col-md-5 col-sm-5 col-xs-10"
-															for="naturalidade">Naturalidade <span
-															class="required">*</span>
-														</label> <label class="col-md-4 col-sm-4 col-xs-8"
-															for="estado-natal">Estado Natal <span
-															class="required">*</span>
-														</label>
-
-														<div class="col-md-3 col-sm-3 col-xs-6">
-															<input type="text" name="nascimento" id="nascimento"
-																required class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-5 col-sm-5 col-xs-10">
-															<input type="text" name="naturalidade" id="naturalidade"
-																required class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-4 col-sm-4 col-xs-8">
-															<input type="text" name="estado-natal" id="estado-natal"
-																required class="form-control col-md-7 col-xs-12">
-														</div>
-													</div>
-
-													<br />
-													<div class="profile_title">
-														<div class="col-md-6">
-															<h2>Filiação</h2>
-														</div>
-													</div>
-													<br />
-													<div class="form-group">
-														<label class="col-md-6 col-sm-6 col-xs-12" for="pai">Nome
-															do Pai <span class="required">*</span>
-														</label> <label class="col-md-6 col-sm-6 col-xs-12" for="mae">Nome
-															da Mãe <span class="required">*</span>
-														</label>
-
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<input type="text" name="pai" id="pai" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-6 col-sm-6 col-xs-11">
-															<input type="text" name="mae" id="mae" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-													</div>
-
-													<br />
-													<div class="profile_title">
-														<div class="col-md-6">
-															<h2>Endereço</h2>
-														</div>
-													</div>
-													<br />
-													<div class="form-group">
-														<label class="col-md-3 col-sm-3 col-xs-6" for="cep">CEP
-															<span class="required">*</span>
-														</label> <label class="col-md-9 col-sm-9 col-xs-18"
-															for="logradouro">Logradouro <span
-															class="required">*</span>
-														</label>
-
-														<div class="col-md-3 col-sm-3 col-xs-6">
-															<input type="text" name="cep" id="cep" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-9 col-sm-9 col-xs-18">
-															<input type="text" name="logradouro" id="logradouro"
-																required class="form-control col-md-7 col-xs-12">
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="col-md-5 col-sm-5 col-xs-10"
-															for="complemento">Complemento <span
-															class="required">*</span>
-														</label> <label class="col-md-3 col-sm-3 col-xs-6" for="numero">Número
-															<span class="required">*</span>
-														</label> <label class="col-md-4 col-sm-4 col-xs-8" for="bairro">Bairro
-															<span class="required">*</span>
-														</label>
-
-														<div class="col-md-5 col-sm-5 col-xs-10">
-															<input type="text" name="complemento" id="complemento"
-																required class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-3 col-sm-3 col-xs-6">
-															<input type="text" name="numero" id="numero" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-4 col-sm-4 col-xs-8">
-															<input type="text" name="bairro" id="bairro" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-													</div>
-
-													<div class="form-group">
-														<label class="col-md-4 col-sm-4 col-xs-8" for="estado">Estado
-															<span class="required">*</span>
-														</label> <label class="col-md-4 col-sm-4 col-xs-8" for="cidade">Cidade
-															<span class="required">*</span>
-														</label> <label class="col-md-4 col-sm-4 col-xs-8" for="pais">País
-															<span class="required">*</span>
-														</label>
-
-														<div class="col-md-4 col-sm-4 col-xs-8">
-															<input type="text" name="estado" id="estado" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-4 col-sm-4 col-xs-8">
-															<input type="text" name="cidade" id="cidade" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-4 col-sm-4 col-xs-8">
-															<input type="text" name="pais" id="pais" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-													</div>
-
-													<br />
-													<div class="profile_title">
-														<div class="col-md-6">
-															<h2>Contato</h2>
-														</div>
-													</div>
-													<br />
-													<div class="form-group">
-														<label class="col-md-3 col-sm-3 col-xs-6" for="email">Email
-															<span class="required">*</span>
-														</label> <label class="col-md-3 col-sm-3 col-xs-6"
-															for="fone-residencial">Telefone Residencial <span
-															class="required">*</span>
-														</label> <label class="col-md-3 col-sm-3 col-xs-6"
-															for="fone-celular">Telefone Celular <span
-															class="required">*</span>
-														</label> <label class="col-md-3 col-sm-3 col-xs-6" for="fone-3">Telefone
-															3 <span class="required">*</span>
-														</label>
-
-														<div class="col-md-3 col-sm-3 col-xs-6">
-															<input type="text" name="email" id="email" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-3 col-sm-3 col-xs-6">
-															<input type="text" name="fone-residencial"
-																id="fone-residencial" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-3 col-sm-3 col-xs-6">
-															<input type="text" name="fone-celular" id="fone-celular"
-																required class="form-control col-md-7 col-xs-12">
-														</div>
-
-														<div class="col-md-3 col-sm-3 col-xs-6">
-															<input type="text" name="fone-3" id="fone-3" required
-																class="form-control col-md-7 col-xs-12">
-														</div>
-													</div>
-
-													<br />
-													<c:if
-														test="${param.tipo.equalsIgnoreCase('aluno') or param.tipo.equalsIgnoreCase('professor')}">
-														<div class="profile_title">
-															<div class="col-md-6">
-																<h2>Educacional</h2>
-															</div>
-														</div>
-														<c:if test="${param.tipo.equalsIgnoreCase('aluno') }">
-															<br />
-															<div class="form-group">
-																<label class="col-md-12 col-sm-12 col-xs-12" for="curso">
-																	Curso</label>
-																<div class="col-md-12 col-sm-12 col-xs-12">
-																	<select name="curso" id="curso"
-																		class="select2_single form-control" required>
-																		<option value="" selected></option>
-																		<c:forEach var="curso"
-																			items="${bancoCurso }">
-																			<option value="${curso.getCodigo() }">${curso.getNome() }</option>
-																		</c:forEach>
-																	</select>
-																</div>
-															</div>
-														</c:if>
-														<c:if test="${param.tipo.equalsIgnoreCase('professor') }">
-															<div class="form-group">
-																<label class="col-md-12 col-sm-12 col-xs-12"
-																	for="disciplina"> Disciplinas</label>
-																<div class="col-md-12 col-sm-12 col-xs-12">
-																	<select name="disciplina" id="disciplina"
-																		class="select2_multiple form-control"
-																		multiple="multiple" name="">
-																		<c:forEach var="disciplina"
-																			items="${bancoDisciplina }">
-																			<option value="${disciplina.getCodigo() }">${disciplina.getNome() }</option>
-																		</c:forEach>
-																	</select>
-																</div>
-															</div>
-															<div class="form-group">
-																<div class="col-md-12 col-sm-12 col-xs-12">
-																	<label for="coordenador"> <input
-																		name="coordenador" id="coordenador" type="checkbox"
-																		class="js-switch" /> Coordenador
-																	</label>
-																</div>
-															</div>
-														</c:if>
-													</c:if>
-													<div class="ln_solid"></div>
-													<div class="form-group">
-														<div class="col-md-6 col-sm-6 col-xs-12">
-															<input type="submit" class="btn btn-success"
-																name="action" value="Concluir cadastro">
-														</div>
-													</div>
-													</form>
 												</div>
 											</div>
 										</div>
+										<c:if test="${sucesso }">
+											<!-- Script que desabilita campos -->
+										</c:if>
 									</c:when>
 									<c:otherwise>Parâmetro Inválido</c:otherwise>
 								</c:choose>
@@ -397,18 +181,21 @@
 		</div>
 	</div>
 
-	<!-- jQuery -->
-	<script src="jquery/jquery.min.js"></script>
+
 	<!-- Bootstrap -->
 	<script src="js/bootstrap.min.js"></script>
 	<!-- Custom Theme Scripts -->
 	<script src="js/custom.min.js"></script>
 
+	<script src="js/validacoes.js"></script>
+
 	<!-- Switchery -->
 	<script src="js/switchery/switchery.min.js"></script>
+	<!-- Select -->
+	<script src="js/select/bootstrap-select.js"></script>
 	<!-- Select2 -->
 	<script src="js/select2/select2.full.min.js"></script>
-	<!-- Select2 -->
+
 	<script>
 		$(document).ready(function() {
 			$(".select2_single").select2({});
@@ -416,6 +203,6 @@
 			$(".select2_multiple").select2({});
 		});
 	</script>
-	<!-- /Select2 -->
+	<!-- /Select2 e Mascaras -->
 </body>
 </html>

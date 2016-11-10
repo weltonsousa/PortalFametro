@@ -21,12 +21,12 @@
 	<div class="menu_section">
 		<h3>Solicitações</h3>
 		<ul class="nav side-menu">
-			<li><a><i class="fa fa-desktop"></i> Solicitação <span
+			<li><a><i class="fa fa-cog"></i> Solicitação <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="solicitacao.jsp?tipo=1">Secretaria</a></li>
-					<li><a href="solicitacao.jsp?tipo=2">Financeiro</a></li>
-					<li><a href="solicitacao.jsp?tipo=3">Relacionamento</a></li>
+					<li><a href="solicitacao.jsp?grupoAtendimento=1">Secretaria</a></li>
+<!-- 					<li><a href="solicitacao.jsp?tipo=2">Financeiro</a></li> -->
+<!-- 					<li><a href="solicitacao.jsp?tipo=3">Relacionamento</a></li> -->
 				</ul></li>
 			<li><a href="acompanhamento.jsp"><i class="fa fa-table"></i>
 					Acompanhamento</a></li>
