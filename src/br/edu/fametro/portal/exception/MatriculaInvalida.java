@@ -1,4 +1,4 @@
-package br.edu.fametro.portal.model.exception;
+package br.edu.fametro.portal.exception;
 
 public class MatriculaInvalida extends Exception{
 	
