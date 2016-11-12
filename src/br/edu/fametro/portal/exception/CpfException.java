@@ -1,6 +1,6 @@
 package br.edu.fametro.portal.exception;
 
-public class ValidarCpf {
+public class CpfException {
 	
 	
 	    int validador1,validador2;
